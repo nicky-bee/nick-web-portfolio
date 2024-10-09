@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  
+<head>
+  <title><%= ENV['FULL_NAME']%>'s Portfolio</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
+</head>
+
+<body>
+  <%= render 'layouts/header' %>
+
+  <div class="cards-container">
+    <div class="card" id="software-engineering" onclick="expandCard(this)">
+      <h2 class="section-title">Software<br>Engineering</h2>
+      <h2 class="abbreviation">ENG<br><i class="fas fa-cogs"></i></h2>
+      <div class="card-content">
+        <%= render "layouts/software-engineering" %>
+      </div>
+    </div>
+
+    <div class="card" id="web-design" onclick="expandCard(this)">
+      <h2 class="section-title">Website<br>Design</h2>
+      <h2 class="abbreviation">WEB<br><i class="fas fa-paint-brush"></i></h2>
+      <div class="card-content">
+        <%= render "layouts/web-design" %>
+      </div>
+    </div>
+
+    <div class="card" id="game-development" onclick="expandCard(this)">
+      <h2 class="section-title">Game<br>Development</h2>
+      <h2 class="abbreviation">GAME<br><i class="fas fa-gamepad"></i></h2>
+      <div class="card-content">
+        <%= render "layouts/game-development" %>
+      </div>
+    </div>
+
+    <div class="card" id="placeholder-card" onclick="resetCards()">
+      <h2 class="section-title">reset</h2>
+      <h2 class="abbreviation">RESET<br><i class="fa-solid fa-grip"></i></h2>
+      <div class="card-content">
+      </div>
+    </div>
+  </div>
+
+  <%= render 'layouts/footer' %>
+
+  <script>
+    // Get card elements
+    const softwareCard = document.getElementById('software-card');
+    const webDesignCard = document.getElementById('web-design-card');
+    const gameDevCard = document.getElementById('game-dev-card');
+    const placeholderCard = document.getElementById('placeholder-card'); // New placeholder card
+    
+    // Function to expand a clicked card and minimize the others
+    function expandCard(card) {
+        placeholderCard.style.display = 'flex';
+        placeholderCard.classList.remove('placeholder-minimized-swe');
+        placeholderCard.classList.remove('placeholder-minimized-wd');
+        placeholderCard.classList.remove('placeholder-minimized-gd');
+        // Remove 'expanded' and 'minimized' classes from all cards first
+        var cards = document.querySelectorAll('.card');
+        cards.forEach(function(c) {
+            c.classList.remove('expanded');
+            c.classList.remove('minimized');
+            c.querySelector('.card-content').style.display = 'none'; // Hide content
+        });
+
+        // Expand the clicked card
+        card.classList.add('expanded');
+        card.querySelector('.card-content').style.display = 'flex'; // Show content
+        if (card.id == 'software-engineering') {
+          placeholderCard.classList.add('placeholder-minimized-swe');
+        }
+        else if (card.id == 'web-design') {
+          placeholderCard.classList.add('placeholder-minimized-wd');
+        }
+        else if (card.id == 'game-development') {
+          placeholderCard.classList.add('placeholder-minimized-gd');
+        }
+
+        cards.forEach(function(c) {
+            if (c !== card) {
+                c.classList.add('minimized');
+                // Hide the section-title element
+                const sectionTitle = c.querySelector('.section-title');
+                if (sectionTitle) {
+                    sectionTitle.style.display = 'none';
+                }
+                // Show the abbreviation element
+                const abbreviation = c.querySelector('.abbreviation');
+                if (abbreviation) {
+                    abbreviation.style.display = 'block';
+                }
+            }
+        });
+    }
+
+    function resetCards() {
+      var cards = document.querySelectorAll('.card');
+      cards.forEach(function(c) {
+          c.classList.remove('expanded');
+          c.classList.remove('minimized');
+          c.querySelector('.card-content').style.display = 'none'; // Hide content
+          const sectionTitle = c.querySelector('.section-title');
+          if (sectionTitle) {
+              sectionTitle.style.display = 'flex';
+          }
+          const abbreviation = c.querySelector('.abbreviation');
+          if (abbreviation) {
+              abbreviation.style.display = 'none';
+          }
+      });
+
+      placeholderCard.style.display = 'none';
+    }
+
+    placeholderCard.style.display = 'none';
+
+    // Add click event listeners to each card
+    softwareCard.addEventListener('click', () => expandCard(softwareCard));
+    webDesignCard.addEventListener('click', () => expandCard(webDesignCard));
+    gameDevCard.addEventListener('click', () => expandCard(gameDevCard));
+  </script>
+</body>
+</html>

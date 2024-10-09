@@ -1,0 +1,577 @@
+:root {
+    --text-color: #f9e29c;
+    --text-hover-color: #e7f33e;
+
+    --header-footer-background: #6b4e31;
+    
+    --background-color: linear-gradient(to bottom, #3b3a30, #574f3b, #9c7c4b, #d0a86a);
+    --card-foreground-color: #5a3c25;
+    --card-background-color: rgba(255, 255, 255, 0.1);
+    --card-border-color: #b07c52;
+    --card-button-background-hover: #8a553c;
+
+    --expanded-card-background: #3b3a30;
+    --minimized-card-background: #7a5739;
+    --reset-card-background: #35261a;
+}
+
+
+/* --- Scrollbar --- */
+::-webkit-scrollbar {
+    display: none;
+}
+
+::-webkit-scrollbar-track {
+    display: none;
+}
+
+::-webkit-scrollbar-thumb {
+    display: none;
+}
+/* ------ */
+
+body {
+    font-family: 'Raleway';
+    text-align: center;
+    background: var(--background-color);
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    padding: 20px;
+    background-color: var(--header-footer-background);
+    color: var(--text-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
+
+h1 {
+    margin: 0;
+    color: var(--text-color);
+    font-size: 2rem;
+    font-family: 'Raleway';
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    margin: 0 10px;
+}
+
+nav ul li a {
+    color: var(--text-color);
+    font-size: 1.8rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: var(--text-hover-color)
+}
+
+.signature {
+    font-size: 18px !important;
+}
+
+.cards-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex: 1;
+    padding: 40px;
+    height: calc(100vh - 160px); /* Adjusted for header and footer */
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative; /* Allows z-index to work */
+}
+
+.card {
+    background-color: var(--card-foreground-color); /* Rustic wood color */
+    width: 30%;
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.603);
+    color: var(--text-color);
+    border-radius: 8px;
+    cursor: pointer;
+    /* border: 1px solid var(--card-border-color); */
+    z-index: 1; /* Ensure normal cards are lower */
+    transition: all 0.5s ease;
+}
+
+.card h2 {
+    font-size: 4rem;
+    color: var(--text-color);
+}
+
+.card-content {
+    display: none;
+    justify-content: center; 
+    align-items: center; 
+    flex-wrap: wrap;
+    gap: 20px;
+    z-index: 0;
+    overflow-y: auto; 
+    max-height: 100%;
+    padding: 20px;
+}
+
+.section-title {
+    font-family: 'Raleway';
+    line-height: 75px;
+    color: var(--text-color);
+    text-align: center;
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+
+.section-container {
+    justify-self: center; 
+    align-items: center; 
+}
+
+.abbreviation {
+    display: none;
+    font-family: 'Poppins' !important;
+    font-size: 16px !important;
+}
+
+.category {
+    width: 100%;
+    justify-content: center; 
+    align-items: center; 
+    font-family: 'Raleway' !important;
+    margin: 0px 0px !important;
+    padding: 5px 0px !important;
+    font-size: 16px !important;
+    text-align: center !important;
+}
+
+.table-container {
+    font-family: 'Poppins';
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    max-height: 475px;
+    margin-top: 10px;
+    flex: 1;
+}
+
+.tech-table {
+    border-collapse: collapse;
+    width: 200px;
+    background-color: var(--expanded-card-background); 
+    border-radius: 8px;         
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    margin: 5px          
+}
+
+.tech-table tr {
+    display: flex;              
+    justify-content: space-between;
+}
+
+.tech-table td {
+    font-size: 20px;
+    padding: 15px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.projects-container {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 0px 0px;
+  }
+  
+  .projects-container .project {
+    flex: 1 1 300px; /* Allows the project to grow, shrink, and have a base width of 300px */
+    max-width: 300px; /* Ensures the project doesn't get too wide */
+    margin-bottom: 10px;
+    margin-top: 5px;
+    padding: 10px;
+    background-color: var(--expanded-card-background);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  .projects-container .project-thumbnail {
+    width: 100%;
+    height: 180px;
+    border-radius: 8px;
+  }
+  
+  .projects-container h3 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.5rem;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .projects-container p {
+    font-family: 'Poppins', sans-serif;
+    margin-top: 10px;
+    font-size: 1rem;
+  }
+
+  .view-project {
+    font-family: 'Poppins';
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: var(--card-foreground-color);
+    color: var(--text-color);
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  
+  .view-project:hover {
+    background-color: var(--card-button-background-hover);
+    transition: 0.2s;
+  }
+  
+  .projects-container .stack {
+    font-size: 24px;
+    margin-bottom: 0px;
+  }
+
+/* Expanded card */
+.expanded {
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 5;
+    position: absolute;
+    left: 0;
+    background-color: var(--background-color);
+    box-shadow: none;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    cursor: auto;
+    transition: all 0.5s ease;
+}
+
+.expanded .section-title {
+    display: none !important;
+}
+
+.expanded .abbreviation {
+    display: none !important;
+}
+
+/* Minimized cards (tabs) */
+.minimized {
+    width: 10%;
+    height: 10vh;
+    position: absolute;
+    right: 1%;
+    z-index: 10;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.212);
+    transition: all 0.5s ease;
+    background-color: var(--minimized-card-background);
+    cursor: pointer;
+}
+
+.minimized .section-title {
+    font-family: 'Poppins' !important;
+    letter-spacing: 2px !important;
+    line-height: 15px !important;
+}
+
+.minimized:nth-child(1) {
+    top: 43%;
+    z-index: 15;
+}
+
+.minimized:nth-child(2) {
+    top: 56.5%;
+    z-index: 14;
+}
+
+.minimized:nth-child(3) {
+    top: 70%;
+    z-index: 13;
+}
+
+.placeholder-minimized-swe {
+    background-color: var(--reset-card-background);
+    top: 43%;
+    z-index: 15;
+}
+
+.placeholder-minimized-wd {
+    background-color: var(--reset-card-background);
+    top: 56.5%;
+    z-index: 14;
+}
+
+.placeholder-minimized-gd {
+    background-color: var(--reset-card-background);
+    top: 70%;
+    z-index: 13;
+}
+
+.minimized h2 {
+    font-size: 0.8rem;
+    color: var(--text-color);
+}
+
+/* Placeholder card styles */
+.placeholder-card {
+    width: 30%;
+    height: 50vh;
+    background-color: var(--reset-card-background);
+    position: relative;
+    border: 1px solid var(--card-border-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+
+/* Ensure the placeholder is hidden when not needed */
+.placeholder-card.hidden {
+    display: none;
+    transition: all 0.5s ease;
+}
+  
+/* Footer */
+footer {
+    background-color: var(--header-footer-background);
+    color: var(--text-color);
+    padding: 10px 0;
+    text-align: center;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    margin-top: auto;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
+
+footer h2 {
+    font-family: 'Raleway';
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+}
+
+.hobby-container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    padding: 10px 0;
+}
+
+.hobby {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 5px;
+    width: 175px;
+}
+
+.hobby i {
+    font-size: 25px;
+    margin-bottom: 5px;
+    color: var(--text-color);
+}
+
+.hobby p {
+    font-family: 'Poppins';
+    color: var(--text-color);
+    font-size: 14px;
+    text-align: center;
+    margin: 0;
+}
+
+/* For 1400x900 screens */
+@media screen and (max-width: 1690px) {
+    .minimized {
+        width: 6% !important;
+    }
+}
+
+/* For 1400x900 screens */
+@media screen and (max-width: 1600px) {
+    .minimized {
+        width: 4% !important;
+    }
+}
+
+/* For 1400x900 screens */
+@media screen and (max-width: 1440px) {
+    .minimized {
+        width: 7% !important;
+    }
+
+    .section-title {
+        font-size: 3.5rem !important;
+    }
+}
+
+/* For 1366x768 screens */
+@media screen and (max-width: 1366px) {
+    .abbreviation {
+        font-size: 12px !important;
+    }
+
+    .minimized {
+        width: 4%;
+        height: 10vh;
+    }
+
+    .minimized .section-title {
+        font-family: 'Poppins' !important;
+        font-size: 14px !important;
+        letter-spacing: 2px !important;
+        line-height: 15px !important;
+    }
+
+    .cards-container {
+        padding: 20px;
+        height: calc(100vh - 160px); /* Adjust for header and footer */
+    }
+
+    .card h2 {
+        font-size: 3rem;
+    }
+
+    .tech-table {
+        max-width: 175px !important;
+    }
+
+    td {
+        font-family: 'Poppins' !important;
+        font-size: 14px !important;
+    }
+
+    .projects-container {
+        margin: 0px 0px;
+    }
+    
+    .projects-container .project {
+        flex: 1 1 250px; /* Adjust width */
+        max-width: 250px;
+    }
+
+    .projects-container h3 {
+        font-size: 1.25rem;
+    }
+
+    .projects-container p {
+        font-size: 0.9rem;
+    }
+
+    .project-thumbnail {
+        height: 140px !important;
+    }
+}
+
+/* For 1280x1024 screens */
+@media screen and (max-width: 1280px) and (min-height: 1024px) {
+    .minimized {
+        width: 4%;
+        height: 10vh;
+    }
+
+    .cards-container {
+        padding: 15px;
+        height: calc(100vh - 160px); /* Adjust for header and footer */
+    }
+
+    .card h2 {
+        font-size: 3.2rem;
+    }
+    
+    .projects-container .project {
+        flex: 1 1 240px; /* Adjust width */
+        max-width: 240px;
+    }
+
+    .projects-container h3 {
+        font-size: 1.2rem;
+    }
+
+    .projects-container p {
+        font-size: 0.9rem;
+    }
+}
+
+@media screen and (max-width: 1280px) and (min-height: 600px) {
+    .section-title {
+        font-size: 30px !important;
+        line-height: 30px !important;
+    }
+}
+
+/* For 1024x768 screens */
+@media screen and (max-width: 1024px) {
+    .minimized {
+        width: 50px !important;
+        height: 10vh !important;
+    }
+    
+    .cards-container {
+        padding: 10px;
+        flex-direction: column; /* Stack cards vertically */
+        height: auto;
+    }
+
+    .card {
+        width: 90%;
+        height: 18vh;
+    }
+
+    tbody {
+        font-size: 12px !important;
+    }
+
+    .section-title {
+        line-height: 40px;
+    }
+
+    .card h2 {
+        font-size: 2.5rem;
+    }
+    
+    .projects-container .project {
+        flex: 1 1 200px; /* Adjust width */
+        max-width: 200px;
+    }
+
+    .projects-container h3 {
+        font-size: 1rem;
+    }
+
+    .projects-container p {
+        font-size: 0.8rem;
+    }
+
+    .project-thumbnail {
+        height: 135px !important;
+    }
+    
+    footer h2 {
+        font-size: 1.2rem;
+    }
+}
