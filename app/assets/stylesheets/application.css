@@ -111,7 +111,6 @@ nav ul li a:hover {
     cursor: pointer;
     /* border: 1px solid var(--card-border-color); */
     z-index: 1; /* Ensure normal cards are lower */
-    transition: all 0.5s ease;
 }
 
 .card h2 {
